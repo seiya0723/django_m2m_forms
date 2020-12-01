@@ -1,0 +1,8 @@
+table {
+    width:100%;
+}
+td {
+    border:solid 0.1rem black;
+    text-align:center;
+}
+

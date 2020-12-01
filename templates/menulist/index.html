@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>ハンバーガー屋</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'menulist/css/style.css' %}">
+</head>
+<body>
+
+    <h1 class="text-center text-white" style="background:orange;">メニューリスト</h1>
+
+    <main class="container">
+
+
+        <form action="" method="POST" class="py-2">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input class="form-control" type="submit" value="送信">
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>カテゴリ</td>
+                    <td>メニュー</td>
+                    <td>朝</td>
+                    <td>昼</td>
+                    <td>夜</td>
+                    <td>持ち帰り</td>
+                    <td>価格</td>
+                    <td>アレルギー</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for content in data %}
+                <tr>
+                    <td>{{ content.category }}</td>
+                    <td>{{ content.name }}</td>
+                    <td>{{ content.breakfast }}</td>
+                    <td>{{ content.lunch }}</td>
+                    <td>{{ content.dinner }}</td>
+                    <td>{{ content.takeout }}</td>
+                    <td>{{ content.price }}円</td>
+                    <td>{% for allergy in content.allergy.all %}{{ allergy }} {% endfor %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </main>
+
+</body>
+</html>
+
